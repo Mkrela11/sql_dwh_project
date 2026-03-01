@@ -1,2 +1,4 @@
-# sql_dwh_project
-Project where I build data warehouse with SSMS. Including all ETL, modeling and analysis
+# Data Warehouse and Analytics 
+
+This is a repository used for a test project. Key principal of this work is to create a solid data warehouse from scratch.
+You can take a look at how it's been done starting from creating tables, ETL process, clearing and cleaning data up to creating fine business ready model
