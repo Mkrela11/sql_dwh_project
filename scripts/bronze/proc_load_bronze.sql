@@ -1,47 +1,63 @@
-BULK INSERT bronze.crm_cust_info
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\cust_info.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
+/*
+Stored Procedure: Load Bronze Layer.
+ This stored procedure loads data into the 'bronze' schema from external CSV files.
+Usage Example:
+    EXEC bronze.load_bronze
+*/
+CREATE OR ALTER PROCEDURE bronze.load_bronze AS
+BEGIN 
+	BEGIN TRY
+		PRINT '/////////////////////////'
+		PRINT 'Loading Bronze Layer Data'
+		PRINT '/////////////////////////'
+  BULK INSERT bronze.crm_cust_info
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\cust_info.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
+  );
+  
+  BULK INSERT bronze.crm_prd_info
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\prd_info.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
+  );
+  
+  BULK INSERT bronze.crm_sales_details
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\sales_details.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
+  );
+  
+  BULK INSERT bronze.erp_loc_a101
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\loc_a101.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
+  );
+  
+  BULK INSERT bronze.erp_cust_az12
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\cust_az12.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
+  );
+  
+  BULK INSERT bronze.erp_px_cat_g1v2
+  FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\px_cat_g1v2.csv'
+  WITH(
+   FIRSTROW = 2, 
+   FIELDTERMINATOR = ',',
+   TABLOCK
 );
-
-BULK INSERT bronze.crm_prd_info
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\prd_info.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
-);
-
-BULK INSERT bronze.crm_sales_details
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_crm\sales_details.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
-);
-
-BULK INSERT bronze.erp_loc_a101
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\loc_a101.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
-);
-
-BULK INSERT bronze.erp_cust_az12
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\cust_az12.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
-);
-
-BULK INSERT bronze.erp_px_cat_g1v2
-FROM 'C:\Users\Piotr\Desktop\DATABASESQL\Folder_Projekt_ETL\sql-data-warehouse-project\datasets\source_erp\px_cat_g1v2.csv'
-WITH(
- FIRSTROW = 2, 
- FIELDTERMINATOR = ',',
- TABLOCK
-);
+	END TRY
+	BEGIN CATCH
+	END CATCH
+END
